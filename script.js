@@ -1,21 +1,34 @@
-// Функция для переключения текста (короткое ↔ полное описание)
-function toggleDesc(button) {
-  let desc = button.previousElementSibling;
-  if (desc.classList.contains("short")) {
-    desc.textContent = desc.getAttribute("data-full");
-    desc.classList.remove("short");
-    button.textContent = "Скрыть";
-  } else {
-    desc.textContent = desc.getAttribute("data-short");
-    desc.classList.add("short");
-    button.textContent = "Подробнее";
-  }
+// Переключение темы
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+  });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  let descriptions = document.querySelectorAll(".desc");
-  descriptions.forEach(desc => {
-    desc.textContent = desc.getAttribute("data-short");
-    desc.classList.add("short");
+// Подробнее/Скрыть описание
+document.querySelectorAll('.toggleDesc').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const more = btn.previousElementSibling.querySelector('.more');
+    if (more.style.display === 'inline') {
+      more.style.display = 'none';
+      btn.textContent = 'Подробнее';
+    } else {
+      more.style.display = 'inline';
+      btn.textContent = 'Скрыть';
+    }
   });
 });
+
+// Модальное окно 18+
+const modal = document.getElementById('ageModal');
+const agreeBtn = document.getElementById('agreeBtn');
+if (modal && agreeBtn) {
+  agreeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    localStorage.setItem('ageConfirmed', 'true');
+  });
+  if (localStorage.getItem('ageConfirmed') === 'true') {
+    modal.style.display = 'none';
+  }
+}

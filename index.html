@@ -2,54 +2,59 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>GROOVE CLOUD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groove Cloud - Магазин</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Модальное окно 18+ -->
+  <div id="ageModal" class="modal">
+    <div class="modal-content">
+      <h2>🔞 Внимание!</h2>
+      <p>Сайт содержит информацию только для лиц старше 18 лет.</p>
+      <button id="agreeBtn">Мне есть 18</button>
+    </div>
+  </div>
+
   <header>
-    <h1>GROOVE CLOUD</h1>
+    <h1>💨 Groove Cloud</h1>
     <nav>
-      <a href="about.html">Почему выбирают нас</a>
+      <a href="about.html">Почему мы?</a>
+      <a href="https://t.me/Groove_cloud" target="_blank">Наш канал</a>
+      <button id="themeToggle">🌞/🌚</button>
     </nav>
   </header>
 
-  <main class="products">
-    <!-- Товар 1 -->
-    <div class="product">
-      <img src="photo_2025-09-14_22-36-37.jpg" alt="RAVE 4000">
-      <h2>VOZOL RAVE 4000</h2>
-      <p class="desc"
-         data-short="💡LED-дисплей... Type-C зарядка..."
-         data-full="💡LED-дисплей - уровень зарядка и жидкости всегда под рукой. Type-C зарядка⚡️ Яркий и узнаваемый корпус с RGB подсветкой 🌈">
-      </p>
-      <button onclick="toggleDesc(this)">Подробнее</button>
-    </div>
+  <main>
+    <section class="products">
+      <div class="product-card">
+        <img src="photo_2025-09-14_22-36-37.jpg" alt="Товар 1">
+        <h3>LED-дисплей с RGB подсветкой</h3>
+        <p class="desc">💡 LED-дисплей - уровень зарядки и жидкости всегда под рукой... <span class="more">Type-C зарядка ⚡️ Яркий и узнаваемый корпус 🌈</span></p>
+        <button class="toggleDesc">Подробнее</button>
+        <a class="buyBtn" href="https://t.me/GroveCloudshop_bot" target="_blank">Купить</a>
+      </div>
 
-    <!-- Товар 2 -->
-    <div class="product">
-      <img src="photo_2025-09-14_22-36-50.jpg" alt="RAVE 50K">
-      <h2>VOZOL RAVE 50K</h2>
-      <p class="desc"
-         data-short="⚡️Type-C зарядка... ECO/BOOST режим..."
-         data-full="⚡️Type-C зарядка - заряжай и лети дальше. Можно выбрать режим: Normal или Boost🌫. ☀️Умный LED-дисплей: уровень заряда и жидкости всегда перед глазами.">
-      </p>
-      <button onclick="toggleDesc(this)">Подробнее</button>
-    </div>
+      <div class="product-card">
+        <img src="photo_2025-09-14_22-36-50.jpg" alt="Товар 2">
+        <h3>40 000 сочных затяжек</h3>
+        <p class="desc">💨 40 000 затяжек хватит на полёт до Луны и обратно... <span class="more">✨ Дизайн словно из будущего ⚡️ Режим ECO / TURBO</span></p>
+        <button class="toggleDesc">Подробнее</button>
+        <a class="buyBtn" href="https://t.me/GroveCloudshop_bot" target="_blank">Купить</a>
+      </div>
 
-    <!-- Товар 3 -->
-    <div class="product">
-      <img src="photo_2025-09-14_22-36-56.jpg" alt="STAR 40000">
-      <h2>VOZOL STAR 40000</h2>
-      <p class="desc"
-         data-short="💨40 000 затяжек... Дизайн из будущего..."
-         data-full="💨40 000 сочных затяжек хватит на полёт до Луны и обратно. ✨Невероятный дизайн, словно из будущего. ⚡️Можно выбрать режим: ECO или TURBO.">
-      </p>
-      <button onclick="toggleDesc(this)">Подробнее</button>
-    </div>
+      <div class="product-card">
+        <img src="photo_2025-09-14_22-36-56.jpg" alt="Товар 3">
+        <h3>Type-C зарядка</h3>
+        <p class="desc">⚡️ Type-C зарядка - заряжай и лети дальше... <span class="more">☀️ Умный LED-дисплей: уровень заряда и жидкости всегда под рукой</span></p>
+        <button class="toggleDesc">Подробнее</button>
+        <a class="buyBtn" href="https://t.me/GroveCloudshop_bot" target="_blank">Купить</a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 GROOVE CLOUD | 🔞 18+</p>
+    <p>© Groove Cloud | <a href="https://t.me/Groove_cloud" target="_blank">Наш канал</a></p>
   </footer>
 
   <script src="script.js"></script>
