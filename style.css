@@ -1,104 +1,96 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  transition: background 0.3s, color 0.3s;
+/* Полноэкранная страница с анимированным сердцем и огнём */
+:root{
+  --bg1: #0f0c29;
+  --bg2: #302b63;
+  --accent: #ff2d55;
+  --accent-deep: #ff0051;
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: linear-gradient(90deg, #6a11cb, #2575fc);
-  color: white;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body,#heart{height:100%}
+body{
+  min-height:100vh;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(ellipse at center, rgba(255,40,85,0.06) 0%, rgba(15,12,41,1) 35%),
+              linear-gradient(135deg,var(--bg1) 0%, var(--bg2) 100%);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  overflow:hidden;
 }
-header nav a, header nav button {
-  margin-left: 1rem;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
+
+/* контейнер */
+.wrap { width:100%; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+
+.heart-container{
+  position:relative;
+  width:min(70vmin,720px);
+  height:min(70vmin,720px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: transform 0.4s ease;
+  user-select:none;
+  border-radius:28px;
+  --glow: 0 0 60px rgba(255,45,85,0.15);
+  box-shadow: var(--glow);
 }
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
+
+/* SVG сердце */
+#heart{ width:70%; height:70%; display:block; filter: drop-shadow(0 6px 24px rgba(0,0,0,0.6)); }
+#heart path{
+  fill: url(#grad1);
+  transform-origin:50% 45%;
+  transition: transform 0.6s cubic-bezier(.2,.9,.3,1), filter 0.2s;
+  will-change: transform;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width:0.5;
+  mix-blend-mode: screen;
 }
-.product-card {
-  background: var(--card-bg, white);
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  text-align: center;
-  transition: transform 0.3s;
+
+/* текст поверх сердца */
+.love-text{
+  position:absolute;
+  text-align:center;
+  font-weight:800;
+  font-size:clamp(28px,8vw,84px);
+  letter-spacing:1px;
+  line-height:0.9;
+  pointer-events:none;
+  transform:translateY(6%);
+  text-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
-.product-card:hover {
-  transform: translateY(-5px);
-}
-.product-card img {
-  max-width: 100%;
-  border-radius: 12px;
-}
-.buyBtn {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-.buyBtn:hover {
-  opacity: 0.9;
-}
-.toggleDesc {
-  margin-top: 0.5rem;
-  background: #2575fc;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #f4f4f4;
-}
-/* Темная тема */
-body.dark {
-  background: #121212;
-  color: #f1f1f1;
-}
-body.dark .product-card {
-  background: #1e1e1e;
-}
-/* Модалка */
-.modal {
-  display: flex;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  align-items: center;
-  justify-content: center;
-}
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-}
-.modal-content button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #2575fc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+
+/* огненные языки — расположены поверх SVG */
+.flames{ position:absolute; inset:auto 12% 6% 12%; display:flex; justify-content:center; gap:6px; align-items:flex-end; height:40%; pointer-events:none; transform-origin:center; opacity:0; transition:opacity 0.4s ease; }
+.flame{ width:18px; height:40px; background:linear-gradient(180deg,#ffd86b,#ff5a00,#ff0051); border-radius:50% 50% 40% 40%; filter: blur(6px) saturate(140%); transform-origin:center bottom; opacity:0.95; mix-blend-mode:screen; position:relative; }
+.flame.f1{ height:46px; width:20px; animation: flick1 1s infinite; }
+.flame.f2{ height:38px; width:16px; animation: flick2 1.05s infinite; transform:translateY(6px); }
+.flame.f3{ height:30px; width:12px; animation: flick3 0.95s infinite; transform:translateY(10px); }
+
+@keyframes flick1{ 0%{transform:scaleY(0.8) translateY(4px) rotate(-2deg)}50%{transform:scaleY(1.15) translateY(-2px) rotate(2deg)}100%{transform:scaleY(0.9) translateY(4px) rotate(-1deg)} }
+@keyframes flick2{ 0%{transform:scaleY(0.9) translateY(6px) rotate(1deg)}50%{transform:scaleY(1.2) translateY(-4px) rotate(-2deg)}100%{transform:scaleY(0.95) translateY(6px) rotate(1deg)} }
+@keyframes flick3{ 0%{transform:scaleY(0.85) translateY(8px) rotate(2deg)}50%{transform:scaleY(1.25) translateY(-6px) rotate(-1deg)}100%{transform:scaleY(0.9) translateY(8px) rotate(2deg)} }
+
+/* активное состояние — сердце вращается и огонь появляется */
+.heart-container.active #heart path{ animation: spinHeart 2s linear infinite; filter: drop-shadow(0 0 28px rgba(255,60,100,0.6)); }
+@keyframes spinHeart{ 0%{transform: rotate(0deg)}100%{transform: rotate(360deg)} }
+.heart-container.active .flames{ opacity:1; transform: translateY(0) scale(1); }
+
+/* небольшая буря частиц вокруг */
+.particles{ position:absolute; inset:0; pointer-events:none; }
+.particle{ position:absolute; width:8px; height:8px; border-radius:50%; background: radial-gradient(circle, rgba(255,140,100,1), rgba(255,50,120,0.2)); opacity:0.9; filter:blur(6px); animation: drift 3s linear infinite; }
+@keyframes drift{ 0%{transform:translateY(0) translateX(0) scale(1); opacity:0.9}100%{transform:translateY(-200px) translateX(80px) scale(.2); opacity:0} }
+
+.controls{ display:flex; gap:12px; align-items:center; justify-content:center; margin-top:10px; }
+.btn{ background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.08); padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; text-decoration:none; }
+.link{ background:transparent; border:1px solid rgba(255,255,255,0.12) }
+
+/* лёгкая адаптивность */
+@media (max-width:600px){
+  .heart-container{ width:92vmin; height:92vmin; border-radius:18px; }
+  .love-text{ font-size:clamp(20px,10vw,48px); }
+  .flames{ inset:auto 8% 6% 8%; }
 }
